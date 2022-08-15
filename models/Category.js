@@ -5,11 +5,11 @@ const sequelize = require('../config/connection.js');
 class Category extends Model {}
 
 Category.init({
-  id:{
-    type:DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
+  id: {
+    type: DataTypes.INTEGER,
     autoIncrement: true,
+    primaryKey: true,
+    allowNull: false
   },
   category_name:{
     type:DataTypes.STRING,

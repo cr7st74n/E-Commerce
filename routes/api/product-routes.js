@@ -5,18 +5,22 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', (req, res) => {
-  // find all products
   // be sure to include its associated Category and Tag data
+  Product.findAll({include:Category})
+  .then(show_product=>{
+    res.json(show_product);
+  })
 });
 
 // get one product
-router.get('/:id', (req, res) => {
+router.get('/find/:id', (req, res) => {
+  Product.findByPk(req.se)
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
 });
 
 // create new product
-router.post('/', (req, res) => {
+router.post('/add', (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -48,7 +52,7 @@ router.post('/', (req, res) => {
 });
 
 // update product
-router.put('/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
   // update product data
   Product.update(req.body, {
     where: {
@@ -89,7 +93,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
   // delete one product by its `id` value
 });
 
