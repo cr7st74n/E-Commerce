@@ -13,20 +13,33 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
+  Tag.findAll({
+    where:{
+      id:req.params.id
+    },
+    include :Product
+  }).then(get_tag=> res.json(get_tag));
 });
 
 router.post('/', (req, res) => {
-  // create a new tag
+  Tag.create({
+    tag_name: req.body.tag_name
+  }).then(new_tag=>res.json(new_tag));
 });
 
 router.put('/:id', (req, res) => {
+  Tag.update(req.body,{
+    where:{
+      id:req.params.id
+    }
+  }).then(update_tag=> res.json(update_tag));
   // update a tag's name by its `id` value
 });
 
 router.delete('/:id', (req, res) => {
-  // delete on tag by its `id` value
+  Tag.destroy({
+    where:{id:req.params.id}
+  }).then(del_tag=>res.json(del_tag));
 });
 
 module.exports = router;

@@ -14,9 +14,11 @@ router.get('/', (req, res) => {
 
 // get one product
 router.get('/find/:id', (req, res) => {
-  Product.findByPk(req.se)
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+  Product.findAll({
+    where:{
+      id: req.params.id
+    }
+  }).then(get_prod=>res.json(get_prod));
 });
 
 // create new product
@@ -94,7 +96,11 @@ router.put('/update/:id', (req, res) => {
 });
 
 router.delete('/delete/:id', (req, res) => {
-  // delete one product by its `id` value
+  Product.destroy({
+    where:{
+      id:req.params.id
+    }
+  }).then(del_pro=>res.json(del_pro));
 });
 
 module.exports = router;
